@@ -1,0 +1,10 @@
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('WAU3MAFD3FN337448', 'Dodge', 'Ram 2500', true, true, 'Purple', 138.51, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('SCFEFBBC6AG814347', 'Dodge', 'Ram 1500', true, false, 'Orange', 122.02, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('1G6DE8E51C0035059', 'Dodge', 'Neon', true, true, 'Black', 136.96, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('WAUKF78E58A572751', 'Ford', 'Bronco', true, false, 'Pink', 133.63, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('JM1GJ1T66F1229951', 'Hyundai', 'HED-5', false, true, 'Purple', 119.05, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('19VDE1F30DE154126', 'Lotus', 'Esprit', true, true, 'Green', 120.05, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('JM1NC2SF8F0709875', 'Ford', 'Thunderbird', false, false, 'Black', 117.23, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('1G6DM1E38C0496509', 'BMW', '3 Series', true, true, 'Pink', 110.80, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('WAUHF98P89A023389', 'BMW', '3 Series', false, true, 'Purple', 100.07, true);
+insert into carro (VIN, Marca, Modelo, Cambio, Arcondicionado, Cor, Preco, Disponivel) values ('WP0CB2A89CS627344', 'BMW', '3 Series', true, false, 'Green', 143.99, true);
