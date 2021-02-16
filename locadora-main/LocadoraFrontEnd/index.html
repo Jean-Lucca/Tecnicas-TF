@@ -8,24 +8,26 @@
     </head>
 
     <body class="d-flex flex-column min-vh-100">
+
         <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Locadora</a>
             </div>
         </nav>
+
         <main class="container mt-5">
             <div class="filtros d-flex flex-row">
                 <form id="form_filtros">
                     <div id="inicioLocacao" class="date-picker">
-                        <label>In&iacute;cio da Loca&ccedil;&atilde;o</label>
+                        <label>Inicio da Locação</label>
                         <input id="date" type="date">
                     </div>
                     <div id="fimLocacao" class="date-picker" >
-                        <label>Fim da Loca&ccedil;&atilde;o</label>
+                        <label>Fim da Locação</label>
                         <input id="date" type="date">
                     </div>
                     <div>
-                        <label>C&acirc;mbio Autom&aacute;tico</label>
+                        <label>Cambio Automático</label>
                         <input type="checkbox" name="cambio" />
                     </div>
 
@@ -36,7 +38,7 @@
                     <button class="submit ">Buscar</button>
                 </form>
                 <div id="carros">
-                <div class="warning">Nenhum carro dispon&iacute;vel</div>
+                <div class="warning">Nenhum carro disponivel</div>
             </div>
             </div>
         </main>
@@ -54,5 +56,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script type="text/javascript" src="main.js"></script>
+        
     </body>
 </html>

@@ -4,7 +4,6 @@ html, body {
     margin: 0px;
 }
 
-/* Cabeçalho */
 h1 {
     font-family: "Helvetica Neue", "Helvetica", sans-serif;
     box-sizing: border-box;
@@ -14,7 +13,6 @@ h1 {
     padding: 0 32px;
 }
 
-/* Corpo */
 .corpo {
     padding: 0 32px 64px 32px;
     box-sizing: border-box;
@@ -24,7 +22,6 @@ h1 {
     display: flex;
 }
 
-/* Filtros */
 #form_filtros button:active {
     background: #47a57f;
 }
@@ -63,7 +60,6 @@ h1 {
     width: 200px;
 }
 
-/* Carros */
 #carros .warning {
     font-family: "Helvetica Neue", "Helvetica", sans-serif;
     text-align: center;
@@ -150,7 +146,6 @@ h1 {
     padding: 32px;
 }
 
-/* Rodapé */
 footer {
     font-family: "Helvetica Neue", "Helvetica", sans-serif;
     line-height: 24px;
