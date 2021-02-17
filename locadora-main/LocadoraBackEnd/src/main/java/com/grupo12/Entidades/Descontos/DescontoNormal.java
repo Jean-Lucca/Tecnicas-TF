@@ -4,7 +4,7 @@ public class DescontoNormal implements RegraDesconto {
 
     @Override
     public double disconto() {
-        return 0.2;
+        return 0.9;
     }
 
 }

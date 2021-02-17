@@ -16,13 +16,15 @@ public class FiltroDTO {
         this.inicioLocacao = inicioLocacao;
         this.fimLocacao = fimLocacao;
     }
-
+    
     public boolean getCambio(){
         return cambio;
     }
+
     public boolean getArcondicionado(){
         return arcondicionado;
     }
+
     public DataLocal getInicioLocacao() {
         return inicioLocacao;
     }

@@ -15,7 +15,6 @@ public class ConfigSeguro{
     public RegraSeguro opcaoRegraClassica() {
         return new RegraSeguroCaro();
     }
- 
     @Bean
     @ConditionalOnProperty(name = "regra.seguro", havingValue = "barato", matchIfMissing = true)
     public RegraSeguro opcaoRegraBarato() {

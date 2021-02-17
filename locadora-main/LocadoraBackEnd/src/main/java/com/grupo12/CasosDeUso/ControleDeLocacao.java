@@ -20,131 +20,133 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ControleDeLocacao {
-  private Frota frota;
-  private Historico historico;
-  private Servicos servicos;
+	private Frota frota;
+	private Historico historico;
+	private Servicos servicos;
 
-  @Autowired
-  public ControleDeLocacao(Servicos servicos, Frota frota, Historico historico) {
-    this.frota = frota;
-    this.historico = historico;
-    this.servicos = servicos;
-  }
+	@Autowired
+	public ControleDeLocacao(Servicos servicos, Frota frota, Historico historico) {
+		this.frota = frota;
+		this.historico = historico;
+		this.servicos = servicos;
+	}
 
-  public Collection<Carro> frotaDeCarros() {
-    return frota.todos();
-  }
+	public Collection<Carro> frotaDeCarros() {
+		return frota.todos();
+	}
 
-  public Collection<Locacao> historicoCarros() {
-    return historico.todos();
-  }
+	public Collection<Locacao> historicoCarros() {
+		return historico.todos();
+	}
 
-  public List<Carro> filtroDisponiveis(FiltroDTO filtro) {
-    List<Carro> disponiveis = (List<Carro>) frota.todos().stream()
-      .filter(c -> c.isDisponivel())
-      .filter(c->c.isCambio() == filtro.getCambio())
-      .filter(c->c.isArcondicionado() == filtro.getArcondicionado())
-      .collect(Collectors.toList());
-      System.out.println(filtro);
-    return disponiveis;
-  }
+	public List<Carro> filtroDisponiveis(FiltroDTO filtro) {
+		List<Carro> disponiveis = (List<Carro>) frota.todos().stream()
+		.filter(c -> c.isDisponivel())
+		.filter(c->c.isCambio() == filtro.getCambio())
+    	.filter(c->c.isArcondicionado() == filtro.getArcondicionado())
+    	.collect(Collectors.toList());
+		System.out.println(filtro);
+		return disponiveis;
+	}
 
-  public List<CarroCustoDTO> listaCarrosDisponiveis(FiltroDTO filtro) {
-    if (ValidaData.validaData(filtro)) {
-      return new ArrayList<>();
-    }
-    
-    List<Carro> disponiveis = filtroDisponiveis(filtro);
+	public List<CarroCustoDTO> listaCarrosDisponiveis(FiltroDTO filtro) {
 
-    List<CarroCustoDTO> informacoes = new ArrayList<>(disponiveis.size());
-    disponiveis.forEach(carro->{
+		if (ValidaData.validaData(filtro)) {
+			return new ArrayList<>();
+		}
 
-      informacoes.add(new CarroCustoDTO(filtro.getInicioLocacao(),
-                                        filtro.getFimLocacao(),
-                                        carro.getVIN(),
-                                        carro.getMarca(),
-                                        carro.getModelo(),
-                                        carro.getPreco(),
-                                        servicos.calculaSeguro(filtro),
-                                        servicos.calculaDesconto(filtro),
-                                        servicos.calculaTotal(filtro, carro)));
-    });
-    return informacoes;
-}
+	List<Carro> disponiveis = filtroDisponiveis(filtro);
 
-  public void criaLocacao(CarroCustoDTO carro) {
-    System.out.println(carro.getInicioLocacao());
-    Locacao locacao = new Locacao(
-      carro.getVin() ,carro.getInicioLocacao(),carro.getFimLocacao(), 10);
-    historico.cadastra(locacao);
-  }
+	List<CarroCustoDTO> informacoes = new ArrayList<>(disponiveis.size());
+	disponiveis.forEach(carro->{
+			informacoes.add(new CarroCustoDTO(filtro.getInicioLocacao(),
+			filtro.getFimLocacao(),
+			carro.getVIN(),
+			carro.getMarca(),
+			carro.getModelo(),
+			carro.getPreco(),
+			servicos.calculaSeguro(filtro),
+			servicos.calculaDesconto(filtro),
+        	servicos.calculaTotal(filtro, carro.getPreco())));
+		});
+		return informacoes;
+	}
 
-  public boolean confirmaLocacao(CarroCustoDTO carro) {
-    if(frota.existente(carro.getVin())){
-      criaLocacao(carro);
-      Carro c = frota.recupera(carro.getVin());
-      c.setDisponivel(false);
-      frota.atualiza(c);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  public boolean devolveCarro(String vin) {
-    if(frota.existente(vin)){
-      Carro c = frota.recupera(vin);
-      c.setDisponivel(true);
-      frota.atualiza(c);
-      return true;
-    } else {
-      return false;
-    }
-  }
+	public void criaLocacao(CarroCustoDTO carro) {
+		System.out.println(carro.getInicioLocacao());
+		Locacao locacao = new Locacao(
+			carro.getVin(),
+			carro.getInicioLocacao(),
+			carro.getFimLocacao(),
+			carro.getTotalPagar());
+		historico.cadastra(locacao);
+	}
 
-  public boolean deletaCarro(String vin) {
-	  if(frota.existente(vin)){
-      frota.remove(vin);
-      return true;
-    } else {
-      return false;
-    } 
-  }
+	public boolean confirmaLocacao(CarroCustoDTO carro) {
+		if(frota.existente(carro.getVin())){
+			criaLocacao(carro);
+			Carro c = frota.recupera(carro.getVin());
+			c.setDisponivel(false);
+			frota.atualiza(c);
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-  public Carro returnCarro(String vin) {
-    if(frota.existente(vin)){
-      return frota.recupera(vin);
-    } else {
-      return null;
-    }
-  }
+	public boolean devolveCarro(String vin) {
+		if(frota.existente(vin)){
+			Carro c = frota.recupera(vin);
+			c.setDisponivel(true);
+			frota.atualiza(c);
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-  public List<CarroCustoDTO> listaIndisponiveis(FiltroDTO filtro) {
-    List<Carro> indisponiveis = (List<Carro>) frota.pesquisa(c -> !c.isDisponivel());
-    List<CarroCustoDTO> informacoes = new ArrayList<>(indisponiveis.size());
-    indisponiveis.forEach(c->{
-      informacoes.add(new CarroCustoDTO(filtro.getInicioLocacao(),
-                                        filtro.getFimLocacao(),
-                                        c.getVIN(),
-                                        c.getMarca(),
-                                        c.getModelo(),
-                                        c.getPreco(),
-                                        1,
-                                        1,
-                                        1));
-    });
-    return informacoes;
-  }
+	public ResponseEntity deletaCarro(String vin) {
+		if(frota.existente(vin)) {
+			Carro aux = frota.recupera(vin);
+			frota.remove(vin);
+			return ResponseEntity.ok().body(aux);
+		} else {
+			return ResponseEntity.notFound().build();
+		} 
+	}
 
-  public void criarCarro(Carro carro) {
-	  frota.cadastra(carro);
-  }
+	public ResponseEntity retornaCarro(String vin) {
+		return ResponseEntity.ok().body(frota.recupera(vin));
+	}
 
-  public ResponseEntity atualizaCarro(String vin, Carro carro) {
-    if(frota.existente(vin)){
-      frota.atualiza(carro);
-      return ResponseEntity.ok().body(carro);
-    } else {
-      return ResponseEntity.notFound().build();
-    }
-  }
+	public List<CarroCustoDTO> listaIndisponiveis(FiltroDTO filtro) {
+		List<Carro> indisponiveis = (List<Carro>) frota.pesquisa(c -> !c.isDisponivel());
+		List<CarroCustoDTO> informacoes = new ArrayList<>(indisponiveis.size());
+		indisponiveis.forEach(c->{
+			informacoes.add(new CarroCustoDTO(filtro.getInicioLocacao(),
+			filtro.getFimLocacao(),
+            c.getVIN(),
+            c.getMarca(),
+            c.getModelo(),
+            c.getPreco(),
+            servicos.calculaSeguro(filtro),
+            servicos.calculaDesconto(filtro),
+            servicos.calculaTotal(filtro, c.getPreco())));
+		});
+		return informacoes;
+	}
+
+	public ResponseEntity criarCarro(Carro carro) {
+		frota.cadastra(carro);
+		return ResponseEntity.ok().body(carro);
+	}
+
+	public ResponseEntity atualizaCarro(String vin, Carro carro) {
+		if(frota.existente(vin)){
+			frota.atualiza(carro);
+			return ResponseEntity.ok().body(carro);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 }

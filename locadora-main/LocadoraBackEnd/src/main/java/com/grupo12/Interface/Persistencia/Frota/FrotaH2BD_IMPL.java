@@ -22,13 +22,11 @@ public class FrotaH2BD_IMPL implements Frota {
     @Override
     public void carrega() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void persiste() {
         // TODO Auto-generated method stub
-
     }
 
     @Override

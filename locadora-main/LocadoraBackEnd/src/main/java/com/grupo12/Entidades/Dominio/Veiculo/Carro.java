@@ -72,6 +72,6 @@ public class Carro {
     @Override
     public String toString() {
         return "Carro [Cambio=" + cambio + ", Preco=" + preco + ", Cor="
-                + cor + ", marca=" + marca + ", modelo=" + modelo + ", VIN=" + vin + "]";
+        + cor + ", marca=" + marca + ", modelo=" + modelo + ", VIN=" + vin + "]";
     } 
 }

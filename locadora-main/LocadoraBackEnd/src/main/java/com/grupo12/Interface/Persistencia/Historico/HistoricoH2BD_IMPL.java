@@ -22,13 +22,11 @@ public class HistoricoH2BD_IMPL implements Historico {
     @Override
     public void carrega() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void persiste() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -62,7 +60,6 @@ public class HistoricoH2BD_IMPL implements Historico {
     @Override
     public void atualiza(Locacao elemento) {
         historico.save(elemento);
-
     }
 
     @Override
